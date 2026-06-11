@@ -1,0 +1,198 @@
+// Orchestrator for the Global Tournament 2026 live feed.
+//
+// Runs on a frequent cron (every ~5 min) but makes API calls only when needed,
+// so it stays inside the API-Football free tier (~100 req/day). See
+// LIVE_TOURNAMENT_PLAN.md §4. Strategy:
+//
+//   1. Daily schedule pull (1 call) → cache kickoff windows.
+//   2. Idle ticks (no live window) → no API calls, exit early.
+//   3. Live window → fetch live fixtures (1 call), merge scores/status.
+//   4. On any match flipping to FT → fetch standings (1 call), replace groups.
+//   5. Per-day call counter hard-stops at the cap; falls back to the
+//      open-source feed on primary error/cap.
+//   6. Diff-before-write: only rewrite tournament2026.json when data changed.
+//
+// State persists in scripts/.tournament-state.json (committed alongside output).
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import * as apiFootball from "./providers/apiFootball.mjs";
+import * as openSource from "./providers/openSource.mjs";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, "..");
+const OUTPUT = path.join(ROOT, "tournament2026.json");
+const STATE = path.join(__dirname, ".tournament-state.json");
+
+const env = {
+  API_FOOTBALL_KEY: process.env.API_FOOTBALL_KEY,
+  LEAGUE_ID: process.env.WC_LEAGUE_ID || "1",
+  SEASON: process.env.WC_SEASON || "2026",
+  OPEN_SOURCE_BASE: process.env.OPEN_SOURCE_BASE || "",
+};
+
+const DAILY_CAP = Number(process.env.DAILY_CALL_CAP || "95"); // headroom under 100
+const MATCH_WINDOW_MS = 150 * 60 * 1000; // kickoff → +2h30m counts as "live"
+const SCHEDULE_REFRESH_HOUR_UTC = 4;
+
+// ---- small helpers -------------------------------------------------------
+
+const readJSON = (p, fallback) => {
+  try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch { return fallback; }
+};
+const today = () => new Date().toISOString().slice(0, 10);
+
+function loadState() {
+  const s = readJSON(STATE, {});
+  if (s.day !== today()) { s.day = today(); s.calls = 0; } // reset daily counter
+  s.calls ??= 0;
+  s.windows ??= [];        // [{startMs, endMs}]
+  s.scheduleDay ??= "";    // day the schedule was last refreshed
+  return s;
+}
+function saveState(s) { fs.writeFileSync(STATE, JSON.stringify(s, null, 2) + "\n"); }
+
+function canCall(state, n = 1) { return state.calls + n <= DAILY_CAP; }
+function spend(state, n = 1) { state.calls += n; }
+
+function inLiveWindow(state, now = Date.now()) {
+  return state.windows.some((w) => now >= w.startMs && now <= w.endMs);
+}
+
+function buildWindows(fixtures) {
+  return fixtures
+    .filter((f) => f.kickoffUTC)
+    .map((f) => {
+      const start = new Date(f.kickoffUTC).getTime();
+      return { startMs: start, endMs: start + MATCH_WINDOW_MS };
+    });
+}
+
+// Stable stringify (sorted keys) so diffing ignores key ordering.
+function stable(obj) {
+  return JSON.stringify(obj, (_, v) =>
+    v && typeof v === "object" && !Array.isArray(v)
+      ? Object.fromEntries(Object.entries(v).sort(([a], [b]) => a.localeCompare(b)))
+      : v
+  );
+}
+
+// Recompute ranks within each group after a merge (points, GD, GF, name).
+function reRank(groups) {
+  for (const g of groups) {
+    g.standings.sort((a, b) =>
+      b.points - a.points || b.goalDifference - a.goalDifference ||
+      b.goalsFor - a.goalsFor || a.team.localeCompare(b.team));
+    g.standings.forEach((s, i) => { s.rank = i + 1; });
+  }
+}
+
+// ---- main ----------------------------------------------------------------
+
+async function main() {
+  const state = loadState();
+  const now = Date.now();
+  let doc = readJSON(OUTPUT, null);
+  let changed = false;
+
+  // (1) Daily schedule refresh — learn today's kickoff windows (1 call).
+  const hourUTC = new Date(now).getUTCHours();
+  const needSchedule = state.scheduleDay !== today() && hourUTC >= SCHEDULE_REFRESH_HOUR_UTC;
+  if (needSchedule && env.API_FOOTBALL_KEY && canCall(state)) {
+    try {
+      const fixtures = await apiFootball.fetchAllFixtures(env);
+      spend(state);
+      state.windows = buildWindows(fixtures);
+      state.scheduleDay = today();
+      doc = mergeFixtures(doc, fixtures);
+      changed = true;
+      console.log(`Schedule refreshed: ${fixtures.length} fixtures, ${state.windows.length} windows.`);
+    } catch (e) {
+      console.warn("Schedule refresh failed:", e.message);
+    }
+  }
+
+  // (2) Idle — no live match. Exit without spending calls.
+  if (!inLiveWindow(state, now)) {
+    if (changed && doc) writeOutput(doc);
+    saveState(state);
+    console.log("Idle tick — no live window. Calls used today:", state.calls);
+    return;
+  }
+
+  // (3) Live window — try primary, then fallback.
+  try {
+    if (!env.API_FOOTBALL_KEY) throw new Error("no API key");
+    if (!canCall(state)) throw new Error("daily cap reached");
+
+    const live = await apiFootball.fetchLiveFixtures(env);
+    spend(state);
+    const before = doc ? stable(doc) : "";
+    doc = mergeFixtures(doc, live);
+
+    // (4) Standings only when a match just finished (authoritative recompute).
+    const someFinished = live.some((m) => m.status === "FT");
+    if (someFinished && canCall(state)) {
+      const { groups } = await apiFootball.fetchStandings(env);
+      spend(state);
+      if (groups.length) { doc.groups = groups; }
+    } else if (doc.groups) {
+      reRank(doc.groups);
+    }
+    doc.lastUpdated = new Date().toISOString();
+    doc.tournamentStatus ||= "group_stage";
+    if (stable(doc) !== before) changed = true;
+    console.log(`Live tick: ${live.length} live fixtures. Calls used today: ${state.calls}`);
+  } catch (primaryErr) {
+    console.warn("Primary source unavailable:", primaryErr.message, "→ trying fallback.");
+    try {
+      const full = await openSource.fetchFullFeed(env);
+      const before = doc ? stable(doc) : "";
+      doc = full;
+      if (stable(doc) !== before) changed = true;
+      console.log("Fallback feed applied.");
+    } catch (fallbackErr) {
+      console.warn("Fallback also failed:", fallbackErr.message, "— keeping last good JSON.");
+    }
+  }
+
+  if (changed && doc) writeOutput(doc);
+  saveState(state);
+}
+
+// Merge incoming fixtures into the document's match list, preserving any matches
+// not present in this batch (e.g. a live batch only contains in-progress games).
+function mergeFixtures(doc, fixtures) {
+  const base = doc && typeof doc === "object" ? doc : emptyDoc();
+  const byId = new Map((base.matches || []).map((m) => [m.id, m]));
+  // Build team→group from current groups (feed-driven membership).
+  const teamGroup = new Map();
+  for (const g of base.groups || []) for (const s of g.standings) teamGroup.set(s.team, g.letter);
+
+  for (const f of fixtures) {
+    const group = f.group || teamGroup.get(f.home) || teamGroup.get(f.away) || null;
+    byId.set(f.id, {
+      id: f.id, group,
+      home: f.home, away: f.away,
+      homeScore: f.homeScore, awayScore: f.awayScore,
+      status: f.status, kickoffUTC: f.kickoffUTC, minute: f.minute,
+    });
+  }
+  base.matches = [...byId.values()].sort(
+    (a, b) => new Date(a.kickoffUTC) - new Date(b.kickoffUTC));
+  base.schemaVersion ||= 1;
+  return base;
+}
+
+function emptyDoc() {
+  return { schemaVersion: 1, lastUpdated: new Date().toISOString(),
+           tournamentStatus: "not_started", groups: [], matches: [] };
+}
+
+function writeOutput(doc) {
+  fs.writeFileSync(OUTPUT, JSON.stringify(doc, null, 2) + "\n");
+  console.log("Wrote", path.basename(OUTPUT));
+}
+
+main().catch((e) => { console.error("Fatal:", e); process.exit(1); });
