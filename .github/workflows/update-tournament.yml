@@ -32,8 +32,8 @@ jobs:
 
       - name: Run updater
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-          WC_LEAGUE_ID: "1"
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+          WC_COMPETITION: "WC"   # football-data.org FIFA World Cup code
           WC_SEASON: "2026"
           DAILY_CALL_CAP: "95"
         run: node scripts/update_tournament.mjs

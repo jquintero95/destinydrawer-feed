@@ -1,8 +1,9 @@
 // Orchestrator for the Global Tournament 2026 live feed.
 //
-// Runs on a frequent cron (every ~5 min) but makes API calls only when needed,
-// so it stays inside the API-Football free tier (~100 req/day). See
-// LIVE_TOURNAMENT_PLAN.md §4. Strategy:
+// Runs on a frequent cron (every ~5 min) but makes API calls only when needed.
+// Source is football-data.org's FREE tier (FIFA World Cup, code "WC"); the limit
+// there is ~10 requests/minute (no daily season cap), and the windowing below
+// keeps us to ≤2 calls per run. See LIVE_TOURNAMENT_PLAN.md §4. Strategy:
 //
 //   1. Daily schedule pull (1 call) → cache kickoff windows.
 //   2. Idle ticks (no live window) → no API calls, exit early.
@@ -18,7 +19,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import * as apiFootball from "./providers/apiFootball.mjs";
+import * as provider from "./providers/footballData.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -26,8 +27,8 @@ const OUTPUT = path.join(ROOT, "tournament2026.json");
 const STATE = path.join(__dirname, ".tournament-state.json");
 
 const env = {
-  API_FOOTBALL_KEY: process.env.API_FOOTBALL_KEY,
-  LEAGUE_ID: process.env.WC_LEAGUE_ID || "1",
+  FOOTBALL_DATA_TOKEN: process.env.FOOTBALL_DATA_TOKEN,
+  COMPETITION: process.env.WC_COMPETITION || "WC", // FIFA World Cup
   SEASON: process.env.WC_SEASON || "2026",
 };
 
@@ -98,9 +99,9 @@ async function main() {
   // (1) Daily schedule refresh — learn today's kickoff windows (1 call).
   const hourUTC = new Date(now).getUTCHours();
   const needSchedule = state.scheduleDay !== today() && hourUTC >= SCHEDULE_REFRESH_HOUR_UTC;
-  if (needSchedule && env.API_FOOTBALL_KEY && canCall(state)) {
+  if (needSchedule && env.FOOTBALL_DATA_TOKEN && canCall(state)) {
     try {
-      const fixtures = await apiFootball.fetchAllFixtures(env);
+      const fixtures = await provider.fetchAllFixtures(env);
       spend(state);
       state.windows = buildWindows(fixtures);
       state.scheduleDay = today();
@@ -123,10 +124,10 @@ async function main() {
   // (3) Live window — fetch from API-Football. On any error/cap, keep the last
   // good JSON untouched (no fallback source; apps serve it as stale-but-valid).
   try {
-    if (!env.API_FOOTBALL_KEY) throw new Error("no API key");
+    if (!env.FOOTBALL_DATA_TOKEN) throw new Error("no API token");
     if (!canCall(state)) throw new Error("daily cap reached");
 
-    const live = await apiFootball.fetchLiveFixtures(env);
+    const live = await provider.fetchLiveFixtures(env);
     spend(state);
     const before = doc ? stable(doc) : "";
     doc = mergeFixtures(doc, live);
@@ -134,7 +135,7 @@ async function main() {
     // (4) Standings only when a match just finished (authoritative recompute).
     const someFinished = live.some((m) => m.status === "FT");
     if (someFinished && canCall(state)) {
-      const { groups } = await apiFootball.fetchStandings(env);
+      const { groups } = await provider.fetchStandings(env);
       spend(state);
       if (groups.length) { doc.groups = groups; }
     } else if (doc.groups) {
