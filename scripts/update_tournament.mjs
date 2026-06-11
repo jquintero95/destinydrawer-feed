@@ -8,8 +8,9 @@
 //   2. Idle ticks (no live window) → no API calls, exit early.
 //   3. Live window → fetch live fixtures (1 call), merge scores/status.
 //   4. On any match flipping to FT → fetch standings (1 call), replace groups.
-//   5. Per-day call counter hard-stops at the cap; falls back to the
-//      open-source feed on primary error/cap.
+//   5. Per-day call counter hard-stops at the cap. On any API error/cap, the
+//      last good tournament2026.json is kept untouched — the apps serve it as
+//      "stale but valid". There is no live fallback source.
 //   6. Diff-before-write: only rewrite tournament2026.json when data changed.
 //
 // State persists in scripts/.tournament-state.json (committed alongside output).
@@ -18,7 +19,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as apiFootball from "./providers/apiFootball.mjs";
-import * as openSource from "./providers/openSource.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -29,7 +29,6 @@ const env = {
   API_FOOTBALL_KEY: process.env.API_FOOTBALL_KEY,
   LEAGUE_ID: process.env.WC_LEAGUE_ID || "1",
   SEASON: process.env.WC_SEASON || "2026",
-  OPEN_SOURCE_BASE: process.env.OPEN_SOURCE_BASE || "",
 };
 
 const DAILY_CAP = Number(process.env.DAILY_CALL_CAP || "95"); // headroom under 100
@@ -121,7 +120,8 @@ async function main() {
     return;
   }
 
-  // (3) Live window — try primary, then fallback.
+  // (3) Live window — fetch from API-Football. On any error/cap, keep the last
+  // good JSON untouched (no fallback source; apps serve it as stale-but-valid).
   try {
     if (!env.API_FOOTBALL_KEY) throw new Error("no API key");
     if (!canCall(state)) throw new Error("daily cap reached");
@@ -144,17 +144,8 @@ async function main() {
     doc.tournamentStatus ||= "group_stage";
     if (stable(doc) !== before) changed = true;
     console.log(`Live tick: ${live.length} live fixtures. Calls used today: ${state.calls}`);
-  } catch (primaryErr) {
-    console.warn("Primary source unavailable:", primaryErr.message, "→ trying fallback.");
-    try {
-      const full = await openSource.fetchFullFeed(env);
-      const before = doc ? stable(doc) : "";
-      doc = full;
-      if (stable(doc) !== before) changed = true;
-      console.log("Fallback feed applied.");
-    } catch (fallbackErr) {
-      console.warn("Fallback also failed:", fallbackErr.message, "— keeping last good JSON.");
-    }
+  } catch (err) {
+    console.warn("Update skipped:", err.message, "— keeping last good JSON.");
   }
 
   if (changed && doc) writeOutput(doc);

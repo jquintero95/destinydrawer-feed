@@ -35,8 +35,6 @@ jobs:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           WC_LEAGUE_ID: "1"
           WC_SEASON: "2026"
-          # Optional fallback source (open-source worldcup2026 feed base URL):
-          OPEN_SOURCE_BASE: ${{ vars.OPEN_SOURCE_BASE }}
           DAILY_CALL_CAP: "95"
         run: node scripts/update_tournament.mjs
 
