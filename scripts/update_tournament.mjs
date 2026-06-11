@@ -30,6 +30,9 @@ const env = {
   FOOTBALL_DATA_TOKEN: process.env.FOOTBALL_DATA_TOKEN,
   COMPETITION: process.env.WC_COMPETITION || "WC", // FIFA World Cup
   SEASON: process.env.WC_SEASON || "2026",
+  // Remotely-controlled free-access cutoff (ISO-8601). Apps read this from the
+  // feed to decide when live/share stops being free. Edit in the workflow.
+  FREE_UNTIL: process.env.FREE_UNTIL || "",
 };
 
 const DAILY_CAP = Number(process.env.DAILY_CALL_CAP || "95"); // headroom under 100
@@ -95,6 +98,14 @@ async function main() {
   const now = Date.now();
   let doc = readJSON(OUTPUT, null);
   let changed = false;
+
+  // Stamp the configured free-access cutoff so it rides in the feed (and in
+  // every diff). Setting it here means a FREE_UNTIL change alone triggers a
+  // commit on the next run.
+  if (doc && env.FREE_UNTIL && doc.freeUntil !== env.FREE_UNTIL) {
+    doc.freeUntil = env.FREE_UNTIL;
+    changed = true;
+  }
 
   // (1) Daily schedule refresh — learn today's kickoff windows (1 call).
   const hourUTC = new Date(now).getUTCHours();
@@ -179,7 +190,8 @@ function mergeFixtures(doc, fixtures) {
 
 function emptyDoc() {
   return { schemaVersion: 1, lastUpdated: new Date().toISOString(),
-           tournamentStatus: "not_started", groups: [], matches: [] };
+           tournamentStatus: "not_started", freeUntil: env.FREE_UNTIL || null,
+           groups: [], matches: [] };
 }
 
 function writeOutput(doc) {

@@ -36,6 +36,9 @@ jobs:
           WC_COMPETITION: "WC"   # football-data.org FIFA World Cup code
           WC_SEASON: "2026"
           DAILY_CALL_CAP: "95"
+          # Free-access cutoff (ISO-8601 UTC). While now < this, live/share is
+          # free for everyone; after it, premium/VIP only. Edit to change remotely.
+          FREE_UNTIL: "2026-06-17T23:59:59Z"
         run: node scripts/update_tournament.mjs
 
       - name: Commit changes
