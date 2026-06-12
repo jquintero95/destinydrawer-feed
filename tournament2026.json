@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-12T19:48:00Z",
+  "lastUpdated": "2026-06-12T00:00:16Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -10,52 +10,52 @@
         {
           "team": "Mexico",
           "flag": "🇲🇽",
-          "played": 1,
-          "won": 1,
+          "played": 0,
+          "won": 0,
           "drawn": 0,
           "lost": 0,
-          "goalsFor": 2,
-          "goalsAgainst": 1,
-          "goalDifference": 1,
-          "points": 3,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0,
+          "points": 0,
           "rank": 1
         },
         {
           "team": "Czech Republic",
           "flag": "🇨🇿",
-          "played": 1,
+          "played": 0,
           "won": 0,
-          "drawn": 1,
+          "drawn": 0,
           "lost": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
           "goalDifference": 0,
-          "points": 1,
+          "points": 0,
           "rank": 2
         },
         {
           "team": "South Africa",
           "flag": "🇿🇦",
-          "played": 1,
+          "played": 0,
           "won": 0,
-          "drawn": 1,
+          "drawn": 0,
           "lost": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
           "goalDifference": 0,
-          "points": 1,
+          "points": 0,
           "rank": 3
         },
         {
           "team": "South Korea",
           "flag": "🇰🇷",
-          "played": 1,
+          "played": 0,
           "won": 0,
           "drawn": 0,
-          "lost": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 2,
-          "goalDifference": -1,
+          "lost": 0,
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "goalDifference": 0,
           "points": 0,
           "rank": 4
         }
@@ -124,14 +124,14 @@
         {
           "team": "Brazil",
           "flag": "🇧🇷",
-          "played": 1,
-          "won": 1,
+          "played": 0,
+          "won": 0,
           "drawn": 0,
           "lost": 0,
-          "goalsFor": 3,
+          "goalsFor": 0,
           "goalsAgainst": 0,
-          "goalDifference": 3,
-          "points": 3,
+          "goalDifference": 0,
+          "points": 0,
           "rank": 1
         },
         {
@@ -163,13 +163,13 @@
         {
           "team": "Scotland",
           "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-          "played": 1,
+          "played": 0,
           "won": 0,
           "drawn": 0,
-          "lost": 1,
+          "lost": 0,
           "goalsFor": 0,
-          "goalsAgainst": 3,
-          "goalDifference": -3,
+          "goalsAgainst": 0,
+          "goalDifference": 0,
           "points": 0,
           "rank": 4
         }
@@ -691,28 +691,6 @@
   ],
   "matches": [
     {
-      "id": 1000,
-      "group": "A",
-      "home": "Mexico",
-      "away": "South Korea",
-      "homeScore": 2,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoffUTC": "2026-06-11T16:00:00Z",
-      "minute": null
-    },
-    {
-      "id": 1001,
-      "group": "A",
-      "home": "South Africa",
-      "away": "Czech Republic",
-      "homeScore": 1,
-      "awayScore": 1,
-      "status": "FT",
-      "kickoffUTC": "2026-06-11T19:00:00Z",
-      "minute": null
-    },
-    {
       "id": 537327,
       "group": "A",
       "home": "Mexico",
@@ -735,28 +713,6 @@
       "minute": null
     },
     {
-      "id": 1002,
-      "group": "C",
-      "home": "Brazil",
-      "away": "Scotland",
-      "homeScore": 3,
-      "awayScore": 0,
-      "status": "FT",
-      "kickoffUTC": "2026-06-12T16:00:00Z",
-      "minute": null
-    },
-    {
-      "id": 1003,
-      "group": "C",
-      "home": "Morocco",
-      "away": "Haiti",
-      "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
-      "kickoffUTC": "2026-06-12T19:00:00Z",
-      "minute": 63
-    },
-    {
       "id": 537345,
       "group": "D",
       "home": "United States",
@@ -765,28 +721,6 @@
       "awayScore": null,
       "status": "NS",
       "kickoffUTC": "2026-06-13T01:00:00Z",
-      "minute": null
-    },
-    {
-      "id": 1004,
-      "group": "E",
-      "home": "Germany",
-      "away": "Ecuador",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
-      "kickoffUTC": "2026-06-13T16:00:00Z",
-      "minute": null
-    },
-    {
-      "id": 1005,
-      "group": "I",
-      "home": "France",
-      "away": "Norway",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
-      "kickoffUTC": "2026-06-13T19:00:00Z",
       "minute": null
     },
     {

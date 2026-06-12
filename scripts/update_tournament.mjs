@@ -116,9 +116,22 @@ async function main() {
       spend(state);
       state.windows = buildWindows(fixtures);
       state.scheduleDay = today();
-      doc = mergeFixtures(doc, fixtures);
+
+      // Also pull authoritative standings on the daily refresh so the table is
+      // correct even before any in-play tick (1 extra call).
+      let groups = null;
+      if (canCall(state)) {
+        ({ groups } = await provider.fetchStandings(env));
+        spend(state);
+      }
+
+      // REPLACE matches + groups from the authoritative feed (don't merge — that
+      // would let stale/seed entries accumulate). This is the source of truth.
+      doc = rebuildDoc(doc, fixtures, groups);
+      doc.lastUpdated = new Date().toISOString();
+      doc.tournamentStatus ||= "group_stage";
       changed = true;
-      console.log(`Schedule refreshed: ${fixtures.length} fixtures, ${state.windows.length} windows.`);
+      console.log(`Schedule refreshed: ${fixtures.length} fixtures, ${(groups || []).length} groups, ${state.windows.length} windows.`);
     } catch (e) {
       console.warn("Schedule refresh failed:", e.message);
     }
@@ -162,6 +175,29 @@ async function main() {
 
   if (changed && doc) writeOutput(doc);
   saveState(state);
+}
+
+// Rebuild the document from the authoritative full fixture list (+ optional
+// standings), REPLACING matches and groups. Used on the daily schedule refresh
+// so the feed is a clean mirror of the source — no stale/seed accumulation.
+function rebuildDoc(doc, fixtures, groups) {
+  const base = doc && typeof doc === "object" ? doc : emptyDoc();
+  if (groups && groups.length) base.groups = groups;
+
+  const teamGroup = new Map();
+  for (const g of base.groups || []) for (const s of g.standings) teamGroup.set(s.team, g.letter);
+
+  base.matches = fixtures
+    .map((f) => ({
+      id: f.id,
+      group: f.group || teamGroup.get(f.home) || teamGroup.get(f.away) || null,
+      home: f.home, away: f.away,
+      homeScore: f.homeScore, awayScore: f.awayScore,
+      status: f.status, kickoffUTC: f.kickoffUTC, minute: f.minute,
+    }))
+    .sort((a, b) => new Date(a.kickoffUTC) - new Date(b.kickoffUTC));
+  base.schemaVersion ||= 1;
+  return base;
 }
 
 // Merge incoming fixtures into the document's match list, preserving any matches
