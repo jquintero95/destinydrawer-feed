@@ -94,87 +94,46 @@ function reRank(groups) {
 // ---- main ----------------------------------------------------------------
 
 async function main() {
-  const state = loadState();
-  const now = Date.now();
   let doc = readJSON(OUTPUT, null);
-  let changed = false;
 
-  // Stamp the configured free-access cutoff so it rides in the feed (and in
-  // every diff). Setting it here means a FREE_UNTIL change alone triggers a
-  // commit on the next run.
-  if (doc && env.FREE_UNTIL && doc.freeUntil !== env.FREE_UNTIL) {
-    doc.freeUntil = env.FREE_UNTIL;
-    changed = true;
-  }
-
-  // (1) Daily schedule refresh — learn today's kickoff windows (1 call).
-  const hourUTC = new Date(now).getUTCHours();
-  const needSchedule = state.scheduleDay !== today() && hourUTC >= SCHEDULE_REFRESH_HOUR_UTC;
-  if (needSchedule && env.FOOTBALL_DATA_TOKEN && canCall(state)) {
-    try {
-      const fixtures = await provider.fetchAllFixtures(env);
-      spend(state);
-      state.windows = buildWindows(fixtures);
-      state.scheduleDay = today();
-
-      // Also pull authoritative standings on the daily refresh so the table is
-      // correct even before any in-play tick (1 extra call).
-      let groups = null;
-      if (canCall(state)) {
-        ({ groups } = await provider.fetchStandings(env));
-        spend(state);
-      }
-
-      // REPLACE matches + groups from the authoritative feed (don't merge — that
-      // would let stale/seed entries accumulate). This is the source of truth.
-      doc = rebuildDoc(doc, fixtures, groups);
-      doc.lastUpdated = new Date().toISOString();
-      doc.tournamentStatus ||= "group_stage";
-      changed = true;
-      console.log(`Schedule refreshed: ${fixtures.length} fixtures, ${(groups || []).length} groups, ${state.windows.length} windows.`);
-    } catch (e) {
-      console.warn("Schedule refresh failed:", e.message);
-    }
-  }
-
-  // (2) Idle — no live match. Exit without spending calls.
-  if (!inLiveWindow(state, now)) {
-    if (changed && doc) writeOutput(doc);
-    saveState(state);
-    console.log("Idle tick — no live window. Calls used today:", state.calls);
+  if (!env.FOOTBALL_DATA_TOKEN) {
+    console.warn("FOOTBALL_DATA_TOKEN not set — nothing to do.");
     return;
   }
 
-  // (3) Live window — fetch from API-Football. On any error/cap, keep the last
-  // good JSON untouched (no fallback source; apps serve it as stale-but-valid).
+  // Paid plan: fetch everything on every run. football-data's /matches returns
+  // ALL matches (incl. live & finished scores) in one call, and /standings gives
+  // the authoritative table — so two calls fully refresh the feed each run, with
+  // no windowing/cap fragility. On error, the last good JSON is kept untouched.
   try {
-    if (!env.FOOTBALL_DATA_TOKEN) throw new Error("no API token");
-    if (!canCall(state)) throw new Error("daily cap reached");
+    const fixtures = await provider.fetchAllFixtures(env);   // all matches, current state
+    const { groups } = await provider.fetchStandings(env);   // authoritative standings
 
-    const live = await provider.fetchLiveFixtures(env);
-    spend(state);
-    const before = doc ? stable(doc) : "";
-    doc = mergeFixtures(doc, live);
+    const before = doc ? contentKey(doc) : "";
+    const next = rebuildDoc(doc, fixtures, groups);          // REPLACE matches + groups
+    if (env.FREE_UNTIL) next.freeUntil = env.FREE_UNTIL;
+    next.tournamentStatus = "group_stage";
 
-    // (4) Standings only when a match just finished (authoritative recompute).
-    const someFinished = live.some((m) => m.status === "FT");
-    if (someFinished && canCall(state)) {
-      const { groups } = await provider.fetchStandings(env);
-      spend(state);
-      if (groups.length) { doc.groups = groups; }
-    } else if (doc.groups) {
-      reRank(doc.groups);
+    // Commit only when the actual content changed (ignore the timestamp), so we
+    // don't churn a commit every 5 minutes when nothing moved.
+    if (contentKey(next) !== before) {
+      next.lastUpdated = new Date().toISOString();
+      writeOutput(next);
+      const active = fixtures.filter((f) => f.status !== "NS").length;
+      console.log(`Updated: ${fixtures.length} matches (${active} live/finished), ${groups.length} groups.`);
+    } else {
+      console.log(`No change: ${fixtures.length} matches, ${groups.length} groups.`);
     }
-    doc.lastUpdated = new Date().toISOString();
-    doc.tournamentStatus ||= "group_stage";
-    if (stable(doc) !== before) changed = true;
-    console.log(`Live tick: ${live.length} live fixtures. Calls used today: ${state.calls}`);
-  } catch (err) {
-    console.warn("Update skipped:", err.message, "— keeping last good JSON.");
+  } catch (e) {
+    console.warn("Update failed — keeping last good JSON:", e.message);
   }
+}
 
-  if (changed && doc) writeOutput(doc);
-  saveState(state);
+// Stable stringify of the document EXCLUDING `lastUpdated`, so we can detect real
+// content changes without the timestamp always making it look different.
+function contentKey(doc) {
+  const { lastUpdated, ...rest } = doc;
+  return stable(rest);
 }
 
 // Rebuild the document from the authoritative full fixture list (+ optional
