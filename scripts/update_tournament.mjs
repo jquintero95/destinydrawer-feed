@@ -113,13 +113,18 @@ async function main() {
     const withScore = fixtures.filter((f) => f.homeScore != null).length;
     console.log(`[matches] statuses=${JSON.stringify(byStatus)} withScore=${withScore}`);
 
-    // Team→group map from fixtures (football-data's standings table isn't split
-    // by group, so we use this to bucket it).
+    // Team→group + team→flag from fixtures.
     const teamGroup = new Map();
+    const teamFlag = new Map();
     for (const f of fixtures) {
       if (f.group) { teamGroup.set(f.home, f.group); teamGroup.set(f.away, f.group); }
+      teamFlag.set(f.home, f.homeFlag); teamFlag.set(f.away, f.awayFlag);
     }
-    const { groups } = await provider.fetchStandings(env, teamGroup);
+    // Compute standings ourselves from finished matches. football-data's own
+    // /standings table lags behind its match results, so deriving the table from
+    // the scores keeps it instant and always consistent with what's shown.
+    const groups = computeStandings(fixtures, teamGroup, teamFlag);
+    console.log(`[standings] computed ${groups.length} groups from results.`);
 
     const before = doc ? contentKey(doc) : "";
     const next = rebuildDoc(doc, fixtures, groups);          // REPLACE matches + groups
@@ -146,6 +151,53 @@ async function main() {
 function contentKey(doc) {
   const { lastUpdated, ...rest } = doc;
   return stable(rest);
+}
+
+// Build group standings from the match results (only FINISHED matches count),
+// independent of the provider's own — and slower-to-update — standings table.
+function computeStandings(fixtures, teamGroup, teamFlag) {
+  const table = new Map(); // team -> stats
+  const ensure = (name) => {
+    if (!table.has(name)) {
+      table.set(name, {
+        team: name, flag: teamFlag.get(name) || "",
+        played: 0, won: 0, drawn: 0, lost: 0,
+        goalsFor: 0, goalsAgainst: 0, goalDifference: 0, points: 0, rank: 0,
+      });
+    }
+    return table.get(name);
+  };
+  // Seed every team in a group so groups are complete even before any games.
+  for (const name of teamGroup.keys()) ensure(name);
+
+  for (const f of fixtures) {
+    if (f.status !== "FT" || f.homeScore == null || f.awayScore == null) continue;
+    const h = ensure(f.home), a = ensure(f.away);
+    h.played++; a.played++;
+    h.goalsFor += f.homeScore; h.goalsAgainst += f.awayScore;
+    a.goalsFor += f.awayScore; a.goalsAgainst += f.homeScore;
+    if (f.homeScore > f.awayScore) { h.won++; h.points += 3; a.lost++; }
+    else if (f.homeScore < f.awayScore) { a.won++; a.points += 3; h.lost++; }
+    else { h.drawn++; a.drawn++; h.points++; a.points++; }
+  }
+  for (const t of table.values()) t.goalDifference = t.goalsFor - t.goalsAgainst;
+
+  const byLetter = new Map();
+  for (const [name, stats] of table) {
+    const letter = teamGroup.get(name);
+    if (!letter) continue;
+    if (!byLetter.has(letter)) byLetter.set(letter, []);
+    byLetter.get(letter).push(stats);
+  }
+  return [...byLetter.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([letter, rows]) => {
+      rows.sort((a, b) =>
+        b.points - a.points || b.goalDifference - a.goalDifference ||
+        b.goalsFor - a.goalsFor || a.team.localeCompare(b.team));
+      rows.forEach((r, i) => { r.rank = i + 1; });
+      return { letter, standings: rows };
+    });
 }
 
 // Rebuild the document from the authoritative full fixture list (+ optional
