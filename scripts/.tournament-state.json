@@ -1,6 +1,6 @@
 {
   "day": "2026-06-12",
-  "calls": 2,
+  "calls": 4,
   "windows": [
     {
       "startMs": 1781204400000,
@@ -279,5 +279,5 @@
       "endMs": 1782621000000
     }
   ],
-  "scheduleDay": ""
+  "scheduleDay": "2026-06-12"
 }
