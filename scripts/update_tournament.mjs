@@ -172,6 +172,7 @@ function computeStandings(fixtures, teamGroup, teamFlag) {
 
   for (const f of fixtures) {
     if (f.status !== "FT" || f.homeScore == null || f.awayScore == null) continue;
+    if (!f.group) continue; // group-stage matches only (skip knockout fixtures)
     const h = ensure(f.home), a = ensure(f.away);
     h.played++; a.played++;
     h.goalsFor += f.homeScore; h.goalsAgainst += f.awayScore;

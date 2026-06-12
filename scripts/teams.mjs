@@ -24,7 +24,7 @@ export const TEAMS = [
   { name: "Switzerland",          flag: "🇨🇭", aliases: [] },
   { name: "Austria",              flag: "🇦🇹", aliases: [] },
   { name: "Türkiye",              flag: "🇹🇷", aliases: ["Turkey", "Turkiye"] },
-  { name: "Bosnia & Herzegovina", flag: "🇧🇦", aliases: ["Bosnia and Herzegovina", "Bosnia"] },
+  { name: "Bosnia & Herzegovina", flag: "🇧🇦", aliases: ["Bosnia and Herzegovina", "Bosnia-Herzegovina", "Bosnia"] },
   { name: "Sweden",               flag: "🇸🇪", aliases: [] },
   { name: "Czech Republic",       flag: "🇨🇿", aliases: ["Czechia"] },
   { name: "Scotland",             flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", aliases: [] },
