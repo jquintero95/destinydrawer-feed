@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-12T05:27:43.372Z",
+  "lastUpdated": "2026-06-12T05:40:04.402Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -10,52 +10,52 @@
         {
           "team": "Mexico",
           "flag": "🇲🇽",
-          "played": 0,
-          "won": 0,
+          "played": 1,
+          "won": 1,
           "drawn": 0,
           "lost": 0,
-          "goalsFor": 0,
+          "goalsFor": 2,
           "goalsAgainst": 0,
-          "goalDifference": 0,
-          "points": 0,
+          "goalDifference": 2,
+          "points": 3,
           "rank": 1
-        },
-        {
-          "team": "Czech Republic",
-          "flag": "🇨🇿",
-          "played": 0,
-          "won": 0,
-          "drawn": 0,
-          "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
-          "points": 0,
-          "rank": 2
-        },
-        {
-          "team": "South Africa",
-          "flag": "🇿🇦",
-          "played": 0,
-          "won": 0,
-          "drawn": 0,
-          "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
-          "points": 0,
-          "rank": 3
         },
         {
           "team": "South Korea",
           "flag": "🇰🇷",
-          "played": 0,
-          "won": 0,
+          "played": 1,
+          "won": 1,
           "drawn": 0,
           "lost": 0,
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "goalDifference": 1,
+          "points": 3,
+          "rank": 2
+        },
+        {
+          "team": "Czech Republic",
+          "flag": "🇨🇿",
+          "played": 1,
+          "won": 0,
+          "drawn": 0,
+          "lost": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "goalDifference": -1,
+          "points": 0,
+          "rank": 3
+        },
+        {
+          "team": "South Africa",
+          "flag": "🇿🇦",
+          "played": 1,
+          "won": 0,
+          "drawn": 0,
+          "lost": 1,
           "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
+          "goalsAgainst": 2,
+          "goalDifference": -2,
           "points": 0,
           "rank": 4
         }
@@ -64,19 +64,6 @@
     {
       "letter": "B",
       "standings": [
-        {
-          "team": "Bosnia & Herzegovina",
-          "flag": "🇧🇦",
-          "played": 0,
-          "won": 0,
-          "drawn": 0,
-          "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
-          "points": 0,
-          "rank": 1
-        },
         {
           "team": "Canada",
           "flag": "🇨🇦",
@@ -88,7 +75,7 @@
           "goalsAgainst": 0,
           "goalDifference": 0,
           "points": 0,
-          "rank": 2
+          "rank": 1
         },
         {
           "team": "Qatar",
@@ -101,7 +88,7 @@
           "goalsAgainst": 0,
           "goalDifference": 0,
           "points": 0,
-          "rank": 3
+          "rank": 2
         },
         {
           "team": "Switzerland",
@@ -114,7 +101,7 @@
           "goalsAgainst": 0,
           "goalDifference": 0,
           "points": 0,
-          "rank": 4
+          "rank": 3
         }
       ]
     },
