@@ -107,6 +107,12 @@ async function main() {
   // no windowing/cap fragility. On error, the last good JSON is kept untouched.
   try {
     const fixtures = await provider.fetchAllFixtures(env);   // all matches, current state
+    // DIAGNOSTIC: status breakdown + any matches that already carry a score.
+    const byStatus = {};
+    for (const f of fixtures) byStatus[f.status] = (byStatus[f.status] || 0) + 1;
+    const withScore = fixtures.filter((f) => f.homeScore != null).length;
+    console.log(`[matches] statuses=${JSON.stringify(byStatus)} withScore=${withScore}`);
+
     const { groups } = await provider.fetchStandings(env);   // authoritative standings
 
     const before = doc ? contentKey(doc) : "";

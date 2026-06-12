@@ -78,7 +78,14 @@ export const fetchLiveFixtures = fetchMatches;
 /** Group standings -> [{ letter, standings:[row...] }] + team→group map. */
 export async function fetchStandings(env) {
   const json = await get(`/competitions/${env.COMPETITION}/standings${env.SEASON ? `?season=${env.SEASON}` : ""}`, env);
-  const blocks = (json.standings ?? []).filter((s) => s.type === "TOTAL");
+  // DIAGNOSTIC: reveal the raw standings shape so we can see why parsing yields 0.
+  const raw = json.standings ?? [];
+  console.log(`[standings] season=${json?.season?.id ?? "?"} blocks=${raw.length}` +
+    ` types=[${[...new Set(raw.map((b) => b.type))].join(",")}]` +
+    ` groups=[${[...new Set(raw.map((b) => b.group))].join(",")}]` +
+    ` stages=[${[...new Set(raw.map((b) => b.stage))].join(",")}]` +
+    ` rows0=${raw[0]?.table?.length ?? 0}`);
+  const blocks = raw.filter((s) => s.type === "TOTAL");
   const groupsByLetter = new Map();
   const teamGroup = new Map();
 
