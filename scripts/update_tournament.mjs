@@ -113,7 +113,13 @@ async function main() {
     const withScore = fixtures.filter((f) => f.homeScore != null).length;
     console.log(`[matches] statuses=${JSON.stringify(byStatus)} withScore=${withScore}`);
 
-    const { groups } = await provider.fetchStandings(env);   // authoritative standings
+    // Team→group map from fixtures (football-data's standings table isn't split
+    // by group, so we use this to bucket it).
+    const teamGroup = new Map();
+    for (const f of fixtures) {
+      if (f.group) { teamGroup.set(f.home, f.group); teamGroup.set(f.away, f.group); }
+    }
+    const { groups } = await provider.fetchStandings(env, teamGroup);
 
     const before = doc ? contentKey(doc) : "";
     const next = rebuildDoc(doc, fixtures, groups);          // REPLACE matches + groups

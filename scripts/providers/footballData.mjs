@@ -75,27 +75,35 @@ async function fetchMatches(env) {
 export const fetchAllFixtures = fetchMatches;
 export const fetchLiveFixtures = fetchMatches;
 
-/** Group standings -> [{ letter, standings:[row...] }] + team→group map. */
-export async function fetchStandings(env) {
+/**
+ * Group standings -> [{ letter, standings:[row...] }].
+ *
+ * football-data returns the World Cup table as a SINGLE 48-team `TOTAL` block
+ * with no per-group split (group field is null), so we bucket each team into its
+ * group using `teamGroup` (built from the fixtures, which DO carry GROUP_A…L),
+ * then re-rank 1–4 within each group. Also handles the per-group-block shape if a
+ * provider ever returns it (block.group wins when present).
+ *
+ * @param teamGroup Map<canonicalTeamName, "A".."L"> derived from fixtures.
+ */
+export async function fetchStandings(env, teamGroup = new Map()) {
   const json = await get(`/competitions/${env.COMPETITION}/standings${env.SEASON ? `?season=${env.SEASON}` : ""}`, env);
-  // DIAGNOSTIC: reveal the raw standings shape so we can see why parsing yields 0.
   const raw = json.standings ?? [];
   console.log(`[standings] season=${json?.season?.id ?? "?"} blocks=${raw.length}` +
     ` types=[${[...new Set(raw.map((b) => b.type))].join(",")}]` +
-    ` groups=[${[...new Set(raw.map((b) => b.group))].join(",")}]` +
-    ` stages=[${[...new Set(raw.map((b) => b.stage))].join(",")}]` +
     ` rows0=${raw[0]?.table?.length ?? 0}`);
-  const blocks = raw.filter((s) => s.type === "TOTAL");
-  const groupsByLetter = new Map();
-  const teamGroup = new Map();
 
-  for (const block of blocks) {
-    const letter = letterFromGroup(block.group);
-    if (!letter) continue;
+  const groupsByLetter = new Map();
+
+  for (const block of raw.filter((s) => s.type === "TOTAL")) {
+    const blockLetter = letterFromGroup(block.group); // null for the flat WC table
     for (const row of block.table ?? []) {
       const team = resolveTeam(row?.team?.name);
       if (!team) continue;
-      teamGroup.set(team.name, letter);
+      const letter = blockLetter || teamGroup.get(team.name);
+      if (!letter) continue; // can't place this team in a group
+      const gf = row.goalsFor ?? 0;
+      const ga = row.goalsAgainst ?? 0;
       const entry = {
         team: team.name,
         flag: team.flag,
@@ -103,23 +111,27 @@ export async function fetchStandings(env) {
         won: row.won ?? 0,
         drawn: row.draw ?? 0,
         lost: row.lost ?? 0,
-        goalsFor: row.goalsFor ?? 0,
-        goalsAgainst: row.goalsAgainst ?? 0,
-        goalDifference: row.goalDifference ?? (row.goalsFor ?? 0) - (row.goalsAgainst ?? 0),
+        goalsFor: gf,
+        goalsAgainst: ga,
+        goalDifference: row.goalDifference ?? gf - ga,
         points: row.points ?? 0,
-        rank: row.position ?? 0,
+        rank: 0,
       };
       if (!groupsByLetter.has(letter)) groupsByLetter.set(letter, []);
       groupsByLetter.get(letter).push(entry);
     }
   }
 
+  // Re-rank 1..N within each group (the source table is ranked globally 1..48).
   const groups = [...groupsByLetter.entries()]
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([letter, standings]) => ({
-      letter,
-      standings: standings.sort((a, b) => a.rank - b.rank),
-    }));
+    .map(([letter, standings]) => {
+      standings.sort((a, b) =>
+        b.points - a.points || b.goalDifference - a.goalDifference ||
+        b.goalsFor - a.goalsFor || a.team.localeCompare(b.team));
+      standings.forEach((s, i) => { s.rank = i + 1; });
+      return { letter, standings };
+    });
 
   return { groups, teamGroup };
 }
