@@ -49,6 +49,10 @@ jobs:
             git add tournament2026.json scripts/.tournament-state.json
             git commit -m "chore: update live tournament feed [skip ci]"
             git push
+            # Purge jsDelivr's CDN cache so apps see the update within minutes
+            # instead of waiting out the ~12h @main branch cache.
+            curl -sf "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main/tournament2026.json" \
+              && echo "Purged jsDelivr cache." || echo "jsDelivr purge failed (non-fatal)."
           else
             echo "No changes to commit."
           fi
