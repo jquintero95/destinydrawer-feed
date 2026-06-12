@@ -68,7 +68,21 @@ function normalizeMatch(m) {
 async function fetchMatches(env) {
   const season = env.SEASON ? `?season=${env.SEASON}` : "";
   const json = await get(`/competitions/${env.COMPETITION}/matches${season}`, env);
-  return (json.matches ?? []).map(normalizeMatch).filter(Boolean);
+  const rawMatches = json.matches ?? [];
+  const out = [];
+  const unresolved = new Set();
+  for (const m of rawMatches) {
+    const nm = normalizeMatch(m);
+    if (nm) { out.push(nm); continue; }
+    // Surface any team name football-data uses that teams.mjs doesn't know, so
+    // we can add the alias. A dropped match removes a team from its group.
+    if (!resolveTeam(m?.homeTeam?.name)) unresolved.add(m?.homeTeam?.name);
+    if (!resolveTeam(m?.awayTeam?.name)) unresolved.add(m?.awayTeam?.name);
+  }
+  if (unresolved.size) {
+    console.log(`[unresolved teams] ${[...unresolved].map((n) => JSON.stringify(n)).join(", ")}`);
+  }
+  return out;
 }
 
 // Both map to the single /matches call (it already includes in-play scores).
