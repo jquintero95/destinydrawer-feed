@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-13T04:54:33.069Z",
+  "lastUpdated": "2026-06-13T20:22:37.569Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -739,9 +739,9 @@
       "group": "B",
       "home": "Qatar",
       "away": "Switzerland",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-13T19:00:00Z",
       "minute": null
     },
