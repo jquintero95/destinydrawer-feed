@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-13T20:22:37.569Z",
+  "lastUpdated": "2026-06-13T21:43:28.040Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -93,27 +93,27 @@
         {
           "team": "Qatar",
           "flag": "🇶🇦",
-          "played": 0,
+          "played": 1,
           "won": 0,
-          "drawn": 0,
+          "drawn": 1,
           "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
           "goalDifference": 0,
-          "points": 0,
+          "points": 1,
           "rank": 3
         },
         {
           "team": "Switzerland",
           "flag": "🇨🇭",
-          "played": 0,
+          "played": 1,
           "won": 0,
-          "drawn": 0,
+          "drawn": 1,
           "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
+          "goalsFor": 1,
+          "goalsAgainst": 1,
           "goalDifference": 0,
-          "points": 0,
+          "points": 1,
           "rank": 4
         }
       ]
@@ -739,9 +739,9 @@
       "group": "B",
       "home": "Qatar",
       "away": "Switzerland",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
-      "status": "LIVE",
+      "status": "FT",
       "kickoffUTC": "2026-06-13T19:00:00Z",
       "minute": null
     },
