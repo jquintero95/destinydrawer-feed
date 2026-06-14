@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-14T18:05:21.174Z",
+  "lastUpdated": "2026-06-14T19:55:09.046Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -236,16 +236,16 @@
       "letter": "E",
       "standings": [
         {
-          "team": "Curacao",
-          "flag": "🇨🇼",
-          "played": 0,
-          "won": 0,
+          "team": "Germany",
+          "flag": "🇩🇪",
+          "played": 1,
+          "won": 1,
           "drawn": 0,
           "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
-          "points": 0,
+          "goalsFor": 7,
+          "goalsAgainst": 1,
+          "goalDifference": 6,
+          "points": 3,
           "rank": 1
         },
         {
@@ -262,8 +262,8 @@
           "rank": 2
         },
         {
-          "team": "Germany",
-          "flag": "🇩🇪",
+          "team": "Ivory Coast",
+          "flag": "🇨🇮",
           "played": 0,
           "won": 0,
           "drawn": 0,
@@ -275,15 +275,15 @@
           "rank": 3
         },
         {
-          "team": "Ivory Coast",
-          "flag": "🇨🇮",
-          "played": 0,
+          "team": "Curacao",
+          "flag": "🇨🇼",
+          "played": 1,
           "won": 0,
           "drawn": 0,
-          "lost": 0,
-          "goalsFor": 0,
-          "goalsAgainst": 0,
-          "goalDifference": 0,
+          "lost": 1,
+          "goalsFor": 1,
+          "goalsAgainst": 7,
+          "goalDifference": -6,
           "points": 0,
           "rank": 4
         }
@@ -783,9 +783,9 @@
       "group": "E",
       "home": "Germany",
       "away": "Curacao",
-      "homeScore": 3,
+      "homeScore": 7,
       "awayScore": 1,
-      "status": "HT",
+      "status": "FT",
       "kickoffUTC": "2026-06-14T17:00:00Z",
       "minute": null
     },
