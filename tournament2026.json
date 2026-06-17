@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-16T22:32:37.506Z",
+  "lastUpdated": "2026-06-17T00:01:53.065Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -882,8 +882,8 @@
       "group": "I",
       "home": "Iraq",
       "away": "Norway",
-      "homeScore": 0,
-      "awayScore": 1,
+      "homeScore": 1,
+      "awayScore": 4,
       "status": "LIVE",
       "kickoffUTC": "2026-06-16T22:00:00Z",
       "minute": null
