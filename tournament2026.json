@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-18T17:30:45.003Z",
+  "lastUpdated": "2026-06-18T19:50:40.138Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -36,27 +36,27 @@
         {
           "team": "Czech Republic",
           "flag": "🇨🇿",
-          "played": 1,
+          "played": 2,
           "won": 0,
-          "drawn": 0,
+          "drawn": 1,
           "lost": 1,
-          "goalsFor": 1,
-          "goalsAgainst": 2,
+          "goalsFor": 2,
+          "goalsAgainst": 3,
           "goalDifference": -1,
-          "points": 0,
+          "points": 1,
           "rank": 3
         },
         {
           "team": "South Africa",
           "flag": "🇿🇦",
-          "played": 1,
+          "played": 2,
           "won": 0,
-          "drawn": 0,
+          "drawn": 1,
           "lost": 1,
-          "goalsFor": 0,
-          "goalsAgainst": 2,
+          "goalsFor": 1,
+          "goalsAgainst": 3,
           "goalDifference": -2,
-          "points": 0,
+          "points": 1,
           "rank": 4
         }
       ]
@@ -960,8 +960,8 @@
       "home": "Czech Republic",
       "away": "South Africa",
       "homeScore": 1,
-      "awayScore": 0,
-      "status": "LIVE",
+      "awayScore": 1,
+      "status": "FT",
       "kickoffUTC": "2026-06-18T16:00:00Z",
       "minute": null
     },
@@ -970,9 +970,9 @@
       "group": "B",
       "home": "Switzerland",
       "away": "Bosnia & Herzegovina",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "HT",
       "kickoffUTC": "2026-06-18T19:00:00Z",
       "minute": null
     },
