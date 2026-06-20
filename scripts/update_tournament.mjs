@@ -25,6 +25,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const OUTPUT = path.join(ROOT, "tournament2026.json");
 const STATE = path.join(__dirname, ".tournament-state.json");
+const FAIR_PLAY_FILE = path.join(__dirname, "fair-play.json");
+
+// Load fair-play deductions. Keys are canonical team names, values are negative
+// integers (e.g. -1 per yellow card). Teams absent from the file default to 0.
+function loadFairPlay() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(FAIR_PLAY_FILE, "utf8"));
+    return raw.teams && typeof raw.teams === "object" ? raw.teams : {};
+  } catch {
+    return {};
+  }
+}
 
 const env = {
   FOOTBALL_DATA_TOKEN: process.env.FOOTBALL_DATA_TOKEN,
@@ -123,7 +135,8 @@ async function main() {
     // Compute standings ourselves from finished matches. football-data's own
     // /standings table lags behind its match results, so deriving the table from
     // the scores keeps it instant and always consistent with what's shown.
-    const groups = computeStandings(fixtures, teamGroup, teamFlag);
+    const fairPlay = loadFairPlay();
+    const groups = computeStandings(fixtures, teamGroup, teamFlag, fairPlay);
     console.log(`[standings] computed ${groups.length} groups from results.`);
 
     const before = doc ? contentKey(doc) : "";
@@ -155,7 +168,7 @@ function contentKey(doc) {
 
 // Build group standings from the match results (only FINISHED matches count),
 // independent of the provider's own — and slower-to-update — standings table.
-function computeStandings(fixtures, teamGroup, teamFlag) {
+function computeStandings(fixtures, teamGroup, teamFlag, fairPlay = {}) {
   const table = new Map(); // team -> stats
   const ensure = (name) => {
     if (!table.has(name)) {
@@ -163,6 +176,7 @@ function computeStandings(fixtures, teamGroup, teamFlag) {
         team: name, flag: teamFlag.get(name) || "",
         played: 0, won: 0, drawn: 0, lost: 0,
         goalsFor: 0, goalsAgainst: 0, goalDifference: 0, points: 0, rank: 0,
+        fairPlay: fairPlay[name] ?? 0,
       });
     }
     return table.get(name);
