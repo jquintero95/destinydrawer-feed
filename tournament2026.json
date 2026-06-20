@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-20T17:44:26.419Z",
+  "lastUpdated": "2026-06-20T19:01:33.753Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -293,34 +293,34 @@
       "letter": "F",
       "standings": [
         {
+          "team": "Netherlands",
+          "flag": "🇳🇱",
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "goalsFor": 7,
+          "goalsAgainst": 3,
+          "goalDifference": 4,
+          "points": 4,
+          "rank": 1
+        },
+        {
           "team": "Sweden",
           "flag": "🇸🇪",
-          "played": 1,
+          "played": 2,
           "won": 1,
           "drawn": 0,
-          "lost": 0,
-          "goalsFor": 5,
-          "goalsAgainst": 1,
-          "goalDifference": 4,
+          "lost": 1,
+          "goalsFor": 6,
+          "goalsAgainst": 6,
+          "goalDifference": 0,
           "points": 3,
-          "rank": 1
+          "rank": 2
         },
         {
           "team": "Japan",
           "flag": "🇯🇵",
-          "played": 1,
-          "won": 0,
-          "drawn": 1,
-          "lost": 0,
-          "goalsFor": 2,
-          "goalsAgainst": 2,
-          "goalDifference": 0,
-          "points": 1,
-          "rank": 2
-        },
-        {
-          "team": "Netherlands",
-          "flag": "🇳🇱",
           "played": 1,
           "won": 0,
           "drawn": 1,
@@ -1047,9 +1047,9 @@
       "group": "F",
       "home": "Netherlands",
       "away": "Sweden",
-      "homeScore": 2,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 5,
+      "awayScore": 1,
+      "status": "FT",
       "kickoffUTC": "2026-06-20T17:00:00Z",
       "minute": null
     },
