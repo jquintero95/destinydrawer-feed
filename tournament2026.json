@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-20T00:18:15.508Z",
+  "lastUpdated": "2026-06-20T04:45:57.826Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -122,6 +122,19 @@
       "letter": "C",
       "standings": [
         {
+          "team": "Brazil",
+          "flag": "🇧🇷",
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "goalDifference": 3,
+          "points": 4,
+          "rank": 1
+        },
+        {
           "team": "Morocco",
           "flag": "🇲🇦",
           "played": 2,
@@ -132,7 +145,7 @@
           "goalsAgainst": 1,
           "goalDifference": 1,
           "points": 4,
-          "rank": 1
+          "rank": 2
         },
         {
           "team": "Scotland",
@@ -145,31 +158,18 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2
-        },
-        {
-          "team": "Brazil",
-          "flag": "🇧🇷",
-          "played": 1,
-          "won": 0,
-          "drawn": 1,
-          "lost": 0,
-          "goalsFor": 1,
-          "goalsAgainst": 1,
-          "goalDifference": 0,
-          "points": 1,
           "rank": 3
         },
         {
           "team": "Haiti",
           "flag": "🇭🇹",
-          "played": 1,
+          "played": 2,
           "won": 0,
           "drawn": 0,
-          "lost": 1,
+          "lost": 2,
           "goalsFor": 0,
-          "goalsAgainst": 1,
-          "goalDifference": -1,
+          "goalsAgainst": 4,
+          "goalDifference": -4,
           "points": 0,
           "rank": 4
         }
@@ -1025,9 +1025,9 @@
       "group": "C",
       "home": "Brazil",
       "away": "Haiti",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 3,
+      "awayScore": 0,
+      "status": "FT",
       "kickoffUTC": "2026-06-20T00:30:00Z",
       "minute": null
     },
@@ -1036,9 +1036,9 @@
       "group": "D",
       "home": "Türkiye",
       "away": "Paraguay",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-20T03:00:00Z",
       "minute": null
     },
