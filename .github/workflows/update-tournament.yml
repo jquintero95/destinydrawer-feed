@@ -45,7 +45,7 @@ jobs:
         run: |
           for i in 1 2 3 4 5; do
             node scripts/update_tournament.mjs
-            [ $i -lt 5 ] && sleep 50
+            if [ $i -lt 5 ]; then sleep 50; fi
           done
 
       - name: Commit changes
