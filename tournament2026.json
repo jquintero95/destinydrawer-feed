@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-20T22:53:40.443Z",
+  "lastUpdated": "2026-06-21T00:03:33.132Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -18,7 +18,8 @@
           "goalsAgainst": 0,
           "goalDifference": 3,
           "points": 6,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -4
         },
         {
           "team": "South Korea",
@@ -31,7 +32,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -3
         },
         {
           "team": "Czech Republic",
@@ -44,7 +46,8 @@
           "goalsAgainst": 3,
           "goalDifference": -1,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -1
         },
         {
           "team": "South Africa",
@@ -57,7 +60,8 @@
           "goalsAgainst": 3,
           "goalDifference": -2,
           "points": 1,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -10
         }
       ]
     },
@@ -75,7 +79,8 @@
           "goalsAgainst": 1,
           "goalDifference": 6,
           "points": 4,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -3
         },
         {
           "team": "Switzerland",
@@ -88,7 +93,8 @@
           "goalsAgainst": 2,
           "goalDifference": 3,
           "points": 4,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -2
         },
         {
           "team": "Bosnia & Herzegovina",
@@ -101,7 +107,8 @@
           "goalsAgainst": 5,
           "goalDifference": -3,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -8
         },
         {
           "team": "Qatar",
@@ -114,7 +121,8 @@
           "goalsAgainst": 7,
           "goalDifference": -6,
           "points": 1,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -9
         }
       ]
     },
@@ -132,7 +140,8 @@
           "goalsAgainst": 1,
           "goalDifference": 3,
           "points": 4,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -3
         },
         {
           "team": "Morocco",
@@ -145,7 +154,8 @@
           "goalsAgainst": 1,
           "goalDifference": 1,
           "points": 4,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -1
         },
         {
           "team": "Scotland",
@@ -158,7 +168,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 3,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -4
         },
         {
           "team": "Haiti",
@@ -171,7 +182,8 @@
           "goalsAgainst": 4,
           "goalDifference": -4,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -4
         }
       ]
     },
@@ -189,7 +201,8 @@
           "goalsAgainst": 1,
           "goalDifference": 5,
           "points": 6,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -4
         },
         {
           "team": "Australia",
@@ -202,7 +215,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -4
         },
         {
           "team": "Paraguay",
@@ -215,7 +229,8 @@
           "goalsAgainst": 4,
           "goalDifference": -2,
           "points": 3,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -9
         },
         {
           "team": "Türkiye",
@@ -228,7 +243,8 @@
           "goalsAgainst": 3,
           "goalDifference": -3,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -2
         }
       ]
     },
@@ -246,7 +262,8 @@
           "goalsAgainst": 2,
           "goalDifference": 7,
           "points": 6,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": 0
         },
         {
           "team": "Ivory Coast",
@@ -259,7 +276,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -3
         },
         {
           "team": "Ecuador",
@@ -272,7 +290,8 @@
           "goalsAgainst": 1,
           "goalDifference": -1,
           "points": 0,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -1
         },
         {
           "team": "Curacao",
@@ -285,7 +304,8 @@
           "goalsAgainst": 7,
           "goalDifference": -6,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": 0
         }
       ]
     },
@@ -303,7 +323,8 @@
           "goalsAgainst": 3,
           "goalDifference": 4,
           "points": 4,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -3
         },
         {
           "team": "Sweden",
@@ -316,7 +337,8 @@
           "goalsAgainst": 6,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": 0
         },
         {
           "team": "Japan",
@@ -329,7 +351,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": 0
         },
         {
           "team": "Tunisia",
@@ -342,7 +365,8 @@
           "goalsAgainst": 5,
           "goalDifference": -4,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -1
         }
       ]
     },
@@ -360,7 +384,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 1,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -1
         },
         {
           "team": "New Zealand",
@@ -373,7 +398,8 @@
           "goalsAgainst": 2,
           "goalDifference": 0,
           "points": 1,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": 0
         },
         {
           "team": "Belgium",
@@ -386,7 +412,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -2
         },
         {
           "team": "Egypt",
@@ -399,7 +426,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -2
         }
       ]
     },
@@ -417,7 +445,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -1
         },
         {
           "team": "Uruguay",
@@ -430,7 +459,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": 0
         },
         {
           "team": "Cape Verde",
@@ -443,7 +473,8 @@
           "goalsAgainst": 0,
           "goalDifference": 0,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -1
         },
         {
           "team": "Spain",
@@ -456,7 +487,8 @@
           "goalsAgainst": 0,
           "goalDifference": 0,
           "points": 1,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -1
         }
       ]
     },
@@ -474,7 +506,8 @@
           "goalsAgainst": 1,
           "goalDifference": 3,
           "points": 3,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": 0
         },
         {
           "team": "France",
@@ -487,7 +520,8 @@
           "goalsAgainst": 1,
           "goalDifference": 2,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": 0
         },
         {
           "team": "Senegal",
@@ -500,7 +534,8 @@
           "goalsAgainst": 3,
           "goalDifference": -2,
           "points": 0,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": 0
         },
         {
           "team": "Iraq",
@@ -513,7 +548,8 @@
           "goalsAgainst": 4,
           "goalDifference": -3,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -1
         }
       ]
     },
@@ -531,7 +567,8 @@
           "goalsAgainst": 0,
           "goalDifference": 3,
           "points": 3,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": 0
         },
         {
           "team": "Austria",
@@ -544,7 +581,8 @@
           "goalsAgainst": 1,
           "goalDifference": 2,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -1
         },
         {
           "team": "Jordan",
@@ -557,7 +595,8 @@
           "goalsAgainst": 3,
           "goalDifference": -2,
           "points": 0,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": 0
         },
         {
           "team": "Algeria",
@@ -570,7 +609,8 @@
           "goalsAgainst": 3,
           "goalDifference": -3,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": 0
         }
       ]
     },
@@ -588,7 +628,8 @@
           "goalsAgainst": 1,
           "goalDifference": 2,
           "points": 3,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": -1
         },
         {
           "team": "DR Congo",
@@ -601,7 +642,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -1
         },
         {
           "team": "Portugal",
@@ -614,7 +656,8 @@
           "goalsAgainst": 1,
           "goalDifference": 0,
           "points": 1,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -3
         },
         {
           "team": "Uzbekistan",
@@ -627,7 +670,8 @@
           "goalsAgainst": 3,
           "goalDifference": -2,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": -1
         }
       ]
     },
@@ -645,7 +689,8 @@
           "goalsAgainst": 2,
           "goalDifference": 2,
           "points": 3,
-          "rank": 1
+          "rank": 1,
+          "fairPlay": 0
         },
         {
           "team": "Ghana",
@@ -658,7 +703,8 @@
           "goalsAgainst": 0,
           "goalDifference": 1,
           "points": 3,
-          "rank": 2
+          "rank": 2,
+          "fairPlay": -1
         },
         {
           "team": "Panama",
@@ -671,7 +717,8 @@
           "goalsAgainst": 1,
           "goalDifference": -1,
           "points": 0,
-          "rank": 3
+          "rank": 3,
+          "fairPlay": -2
         },
         {
           "team": "Croatia",
@@ -684,7 +731,8 @@
           "goalsAgainst": 4,
           "goalDifference": -2,
           "points": 0,
-          "rank": 4
+          "rank": 4,
+          "fairPlay": 0
         }
       ]
     }
@@ -1069,9 +1117,9 @@
       "group": "E",
       "home": "Ecuador",
       "away": "Curacao",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-21T00:00:00Z",
       "minute": null
     },
