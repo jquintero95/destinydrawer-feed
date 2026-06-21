@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-21T05:15:28.832Z",
+  "lastUpdated": "2026-06-21T09:04:25.560Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -327,6 +327,20 @@
           "fairPlay": -3
         },
         {
+          "team": "Japan",
+          "flag": "🇯🇵",
+          "played": 2,
+          "won": 1,
+          "drawn": 1,
+          "lost": 0,
+          "goalsFor": 6,
+          "goalsAgainst": 2,
+          "goalDifference": 4,
+          "points": 4,
+          "rank": 2,
+          "fairPlay": 0
+        },
+        {
           "team": "Sweden",
           "flag": "🇸🇪",
           "played": 2,
@@ -337,33 +351,19 @@
           "goalsAgainst": 6,
           "goalDifference": 0,
           "points": 3,
-          "rank": 2,
-          "fairPlay": 0
-        },
-        {
-          "team": "Japan",
-          "flag": "🇯🇵",
-          "played": 1,
-          "won": 0,
-          "drawn": 1,
-          "lost": 0,
-          "goalsFor": 2,
-          "goalsAgainst": 2,
-          "goalDifference": 0,
-          "points": 1,
           "rank": 3,
           "fairPlay": 0
         },
         {
           "team": "Tunisia",
           "flag": "🇹🇳",
-          "played": 1,
+          "played": 2,
           "won": 0,
           "drawn": 0,
-          "lost": 1,
+          "lost": 2,
           "goalsFor": 1,
-          "goalsAgainst": 5,
-          "goalDifference": -4,
+          "goalsAgainst": 9,
+          "goalDifference": -8,
           "points": 0,
           "rank": 4,
           "fairPlay": -1
@@ -1129,8 +1129,8 @@
       "home": "Tunisia",
       "away": "Japan",
       "homeScore": 0,
-      "awayScore": 2,
-      "status": "LIVE",
+      "awayScore": 4,
+      "status": "FT",
       "kickoffUTC": "2026-06-21T04:00:00Z",
       "minute": null
     },
