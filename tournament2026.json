@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-22T00:13:38.188Z",
+  "lastUpdated": "2026-06-22T02:29:13.191Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -385,7 +385,7 @@
           "goalDifference": 0,
           "points": 2,
           "rank": 1,
-          "fairPlay": -1
+          "fairPlay": -2
         },
         {
           "team": "Belgium",
@@ -399,7 +399,7 @@
           "goalDifference": 0,
           "points": 2,
           "rank": 2,
-          "fairPlay": -2
+          "fairPlay": -6
         },
         {
           "team": "New Zealand",
@@ -460,7 +460,7 @@
           "goalDifference": 0,
           "points": 2,
           "rank": 2,
-          "fairPlay": 0
+          "fairPlay": -2
         },
         {
           "team": "Cape Verde",
@@ -474,7 +474,7 @@
           "goalDifference": 0,
           "points": 2,
           "rank": 3,
-          "fairPlay": -1
+          "fairPlay": -3
         },
         {
           "team": "Saudi Arabia",
@@ -488,7 +488,7 @@
           "goalDifference": -4,
           "points": 1,
           "rank": 4,
-          "fairPlay": -1
+          "fairPlay": -3
         }
       ]
     },
@@ -1172,9 +1172,9 @@
       "group": "G",
       "home": "New Zealand",
       "away": "Egypt",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 1,
+      "awayScore": 2,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-22T01:00:00Z",
       "minute": null
     },
