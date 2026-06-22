@@ -1,16 +1,16 @@
 {
   "_note": "Cumulative FIFA fair-play deductions per team. Update after each matchday. Points: YC = -1 | 2nd YC (indirect red) = -3 | Direct RC = -3 | YC + Direct RC = -4. More negative = worse fair play. Teams not listed default to 0.",
-  "_source": "ESPN discipline table (YC + 3×RC = FIFA fair play points, negated). Updated June 21 2026.",
+  "_source": "Sofascore match stats (via Chrome). MD2 update June 21 2026. Belgium/Iran/Spain/Saudi Arabia/Uruguay/Cape Verde confirmed FT. New Zealand/Egypt pending.",
   "teams": {
     "Algeria":               0,
     "Argentina":             0,
     "Australia":            -4,
     "Austria":              -1,
-    "Belgium":              -2,
+    "Belgium":              -6,
     "Bosnia & Herzegovina": -8,
     "Brazil":               -3,
     "Canada":               -3,
-    "Cape Verde":           -1,
+    "Cape Verde":           -3,
     "Colombia":             -1,
     "Croatia":               0,
     "Curacao":              -5,
@@ -23,7 +23,7 @@
     "Germany":               0,
     "Ghana":                -1,
     "Haiti":                -4,
-    "Iran":                 -1,
+    "Iran":                 -2,
     "Iraq":                 -1,
     "Ivory Coast":          -3,
     "Japan":                 0,
@@ -37,7 +37,7 @@
     "Paraguay":             -9,
     "Portugal":             -3,
     "Qatar":                -9,
-    "Saudi Arabia":         -1,
+    "Saudi Arabia":         -3,
     "Scotland":             -4,
     "Senegal":               0,
     "South Africa":        -10,
@@ -48,7 +48,7 @@
     "Tunisia":              -1,
     "Türkiye":              -2,
     "United States":        -4,
-    "Uruguay":               0,
+    "Uruguay":              -2,
     "Uzbekistan":           -1
   }
 }
