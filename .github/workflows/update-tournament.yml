@@ -39,13 +39,14 @@ jobs:
           # Free-access cutoff (ISO-8601 UTC). While now < this, live/share is
           # free for everyone; after it, premium/VIP only. Edit to change remotely.
           FREE_UNTIL: "2026-06-17T23:59:59Z"
-        # Loop 5× with ~1-minute gaps so each job polls at ~1-min resolution
-        # even when GitHub's scheduler fires late. 2 API calls × 5 = 10 calls
-        # per job, well within the 20 calls/min rate limit.
+        # Loop 8× with 30-second gaps so each job polls at ~30-second resolution
+        # during live matches. 8 runs × 30s = 3m50s total, safely under the 5-min
+        # cron interval. When no match is live the script exits early without calling
+        # the API, so extra loop iterations cost nothing in that case.
         run: |
-          for i in 1 2 3 4 5; do
+          for i in 1 2 3 4 5 6 7 8; do
             node scripts/update_tournament.mjs
-            if [ $i -lt 5 ]; then sleep 50; fi
+            if [ $i -lt 8 ]; then sleep 30; fi
           done
 
       - name: Commit changes
