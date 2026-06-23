@@ -1,7 +1,7 @@
 {
   "_note": "Cumulative FIFA fair-play deductions per team. Update after each matchday. Points: YC = -1 | 2nd YC (indirect red) = -3 | Direct RC = -3 | YC + Direct RC = -4. More negative = worse fair play. Teams not listed default to 0.",
   "_source": "Sofascore match incidents (auto-updated via Chrome). Last run: 2026-06-23.",
-  "_processedMatchIds": [15186499, 15186840, 15186800, 15186827, 15186502, 15186769, 15186770, 15186740, 15186858],
+  "_processedMatchIds": [15186499, 15186840, 15186800, 15186827, 15186502, 15186769, 15186770, 15186740, 15186858, 15186672],
   "teams": {
     "Algeria":              -1,
     "Argentina":            -2,
@@ -19,10 +19,10 @@
     "DR Congo":             -1,
     "Ecuador":              -2,
     "Egypt":                -3,
-    "England":               0,
+    "England":              -1,
     "France":                0,
     "Germany":               0,
-    "Ghana":                -1,
+    "Ghana":                -2,
     "Haiti":                -4,
     "Iran":                 -2,
     "Iraq":                 -2,
