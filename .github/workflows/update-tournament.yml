@@ -6,11 +6,15 @@ name: Update Tournament Feed
 
 on:
   schedule:
-    # Every 5 minutes (GitHub's minimum; runs may be delayed under load).
-    - cron: "*/5 * * * *"
+    # Two offset schedules, each firing every 5 minutes but staggered 2.5 min apart.
+    # Net effect: a job starts roughly every 2–3 minutes, covering the full window.
+    # Each job's inner loop runs ~2 min, so jobs complete well before the next fires.
+    - cron: "0,5,10,15,20,25,30,35,40,45,50,55 * * * *"   # on the 5-min marks
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"   # offset +2 min
   workflow_dispatch: {}   # allow manual runs from the Actions tab
 
-# Prevent overlapping runs from racing on the commit.
+# Prevent concurrent runs from racing on the same commit.
+# cancel-in-progress: false means a second trigger queues rather than kills the first.
 concurrency:
   group: update-tournament
   cancel-in-progress: false
@@ -39,14 +43,15 @@ jobs:
           # Free-access cutoff (ISO-8601 UTC). While now < this, live/share is
           # free for everyone; after it, premium/VIP only. Edit to change remotely.
           FREE_UNTIL: "2026-06-17T23:59:59Z"
-        # Loop 8× with 30-second gaps so each job polls at ~30-second resolution
-        # during live matches. 8 runs × 30s = 3m50s total, safely under the 5-min
-        # cron interval. When no match is live the script exits early without calling
-        # the API, so extra loop iterations cost nothing in that case.
+        # Loop 4× with 30-second gaps (~2 min total per job).
+        # With two cron entries offset by 2 min, jobs interleave without queuing:
+        #   :00 job polls at :00, :30, :01, :01:30
+        #   :02 job polls at :02, :02:30, :03, :03:30
+        # Net: feed updated roughly every 30 seconds across the full 5-min window.
         run: |
-          for i in 1 2 3 4 5 6 7 8; do
+          for i in 1 2 3 4; do
             node scripts/update_tournament.mjs
-            if [ $i -lt 8 ]; then sleep 30; fi
+            if [ $i -lt 4 ]; then sleep 30; fi
           done
 
       - name: Commit changes
