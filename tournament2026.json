@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T19:35:28.621Z",
+  "lastUpdated": "2026-06-24T19:50:18.547Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1273,7 +1273,7 @@
       "away": "Canada",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "LIVE",
+      "status": "HT",
       "kickoffUTC": "2026-06-24T19:00:00Z",
       "minute": null
     },
@@ -1283,7 +1283,7 @@
       "home": "Bosnia & Herzegovina",
       "away": "Qatar",
       "homeScore": 2,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "LIVE",
       "kickoffUTC": "2026-06-24T19:00:00Z",
       "minute": null
