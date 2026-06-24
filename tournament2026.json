@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T22:43:45.755Z",
+  "lastUpdated": "2026-06-24T23:21:02.601Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1293,8 +1293,8 @@
       "group": "C",
       "home": "Morocco",
       "away": "Haiti",
-      "homeScore": 1,
-      "awayScore": 1,
+      "homeScore": 2,
+      "awayScore": 2,
       "status": "LIVE",
       "kickoffUTC": "2026-06-24T22:00:00Z",
       "minute": null
@@ -1305,7 +1305,7 @@
       "home": "Scotland",
       "away": "Brazil",
       "homeScore": 0,
-      "awayScore": 1,
+      "awayScore": 2,
       "status": "LIVE",
       "kickoffUTC": "2026-06-24T22:00:00Z",
       "minute": null
