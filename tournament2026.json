@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-24T19:50:18.547Z",
+  "lastUpdated": "2026-06-24T20:08:47.743Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1271,9 +1271,9 @@
       "group": "B",
       "home": "Switzerland",
       "away": "Canada",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
-      "status": "HT",
+      "status": "LIVE",
       "kickoffUTC": "2026-06-24T19:00:00Z",
       "minute": null
     },
