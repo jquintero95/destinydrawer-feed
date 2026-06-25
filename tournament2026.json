@@ -1316,7 +1316,11 @@
       "home": "Czech Republic",
       "away": "Mexico",
       "homeScore": 0,
+<<<<<<< HEAD
       "awayScore": 2,
+=======
+      "awayScore": 0,
+>>>>>>> 5e54818 (More updates)
       "status": "LIVE",
       "kickoffUTC": "2026-06-25T01:00:00Z",
       "minute": null
