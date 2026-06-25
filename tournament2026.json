@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-25T00:15:09.160Z",
+  "lastUpdated": "2026-06-25T01:29:52.468Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1315,9 +1315,9 @@
       "group": "A",
       "home": "Czech Republic",
       "away": "Mexico",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-25T01:00:00Z",
       "minute": null
     },
@@ -1326,9 +1326,9 @@
       "group": "A",
       "home": "South Africa",
       "away": "South Korea",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-25T01:00:00Z",
       "minute": null
     },
