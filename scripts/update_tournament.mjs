@@ -222,13 +222,10 @@ function rebuildDoc(doc, fixtures, groups) {
   const base = doc && typeof doc === "object" ? doc : emptyDoc();
   if (groups && groups.length) base.groups = groups;
 
-  const teamGroup = new Map();
-  for (const g of base.groups || []) for (const s of g.standings) teamGroup.set(s.team, g.letter);
-
   base.matches = fixtures
     .map((f) => ({
       id: f.id,
-      group: f.group || teamGroup.get(f.home) || teamGroup.get(f.away) || null,
+      group: f.group || null, // null for knockout fixtures — no team-membership fallback
       home: f.home, away: f.away,
       homeScore: f.homeScore, awayScore: f.awayScore,
       status: f.status, kickoffUTC: f.kickoffUTC, minute: f.minute,
@@ -243,12 +240,9 @@ function rebuildDoc(doc, fixtures, groups) {
 function mergeFixtures(doc, fixtures) {
   const base = doc && typeof doc === "object" ? doc : emptyDoc();
   const byId = new Map((base.matches || []).map((m) => [m.id, m]));
-  // Build team→group from current groups (feed-driven membership).
-  const teamGroup = new Map();
-  for (const g of base.groups || []) for (const s of g.standings) teamGroup.set(s.team, g.letter);
 
   for (const f of fixtures) {
-    const group = f.group || teamGroup.get(f.home) || teamGroup.get(f.away) || null;
+    const group = f.group || null; // null for knockout fixtures — no team-membership fallback
     byId.set(f.id, {
       id: f.id, group,
       home: f.home, away: f.away,
