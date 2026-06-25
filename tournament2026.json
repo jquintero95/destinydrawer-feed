@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-25T20:05:46.523Z",
+  "lastUpdated": "2026-06-25T20:23:01.369Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1337,7 +1337,7 @@
       "group": "E",
       "home": "Ecuador",
       "away": "Germany",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 1,
       "status": "LIVE",
       "kickoffUTC": "2026-06-25T20:00:00Z",
@@ -1349,7 +1349,7 @@
       "home": "Curacao",
       "away": "Ivory Coast",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "status": "LIVE",
       "kickoffUTC": "2026-06-25T20:00:00Z",
       "minute": null
