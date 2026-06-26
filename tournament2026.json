@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-26T20:15:54.166Z",
+  "lastUpdated": "2026-06-26T20:41:08.263Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1414,7 +1414,7 @@
       "group": "I",
       "home": "Senegal",
       "away": "Iraq",
-      "homeScore": 1,
+      "homeScore": 4,
       "awayScore": 0,
       "status": "LIVE",
       "kickoffUTC": "2026-06-26T19:00:00Z",
