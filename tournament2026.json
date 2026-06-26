@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-25T23:15:37.191Z",
+  "lastUpdated": "2026-06-26T00:43:49.765Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1359,8 +1359,8 @@
       "group": "F",
       "home": "Tunisia",
       "away": "Netherlands",
-      "homeScore": 0,
-      "awayScore": 2,
+      "homeScore": 1,
+      "awayScore": 3,
       "status": "LIVE",
       "kickoffUTC": "2026-06-25T23:00:00Z",
       "minute": null
@@ -1370,8 +1370,8 @@
       "group": "F",
       "home": "Japan",
       "away": "Sweden",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 1,
       "status": "LIVE",
       "kickoffUTC": "2026-06-25T23:00:00Z",
       "minute": null
