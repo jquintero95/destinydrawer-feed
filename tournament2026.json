@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-26T21:41:55.021Z",
+  "lastUpdated": "2026-06-27T00:46:24.488Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1425,9 +1425,9 @@
       "group": "H",
       "home": "Uruguay",
       "away": "Spain",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-27T00:00:00Z",
       "minute": null
     },
@@ -1436,9 +1436,9 @@
       "group": "H",
       "home": "Cape Verde",
       "away": "Saudi Arabia",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "NS",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "LIVE",
       "kickoffUTC": "2026-06-27T00:00:00Z",
       "minute": null
     },
