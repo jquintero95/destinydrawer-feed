@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-27T05:08:41.627Z",
+  "lastUpdated": "2026-06-27T08:04:33.398Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1553,6 +1553,17 @@
       "minute": null
     },
     {
+      "id": 537415,
+      "group": "E",
+      "home": "Germany",
+      "away": "Paraguay",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-06-29T20:30:00Z",
+      "minute": null
+    },
+    {
       "id": 537418,
       "group": "F",
       "home": "Netherlands",
@@ -1564,6 +1575,28 @@
       "minute": null
     },
     {
+      "id": 537424,
+      "group": "E",
+      "home": "Ivory Coast",
+      "away": "Norway",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-06-30T17:00:00Z",
+      "minute": null
+    },
+    {
+      "id": 537416,
+      "group": "I",
+      "home": "France",
+      "away": "Sweden",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-06-30T21:00:00Z",
+      "minute": null
+    },
+    {
       "id": 537421,
       "group": "D",
       "home": "United States",
@@ -1572,6 +1605,28 @@
       "awayScore": null,
       "status": "NS",
       "kickoffUTC": "2026-07-02T00:00:00Z",
+      "minute": null
+    },
+    {
+      "id": 537428,
+      "group": "D",
+      "home": "Australia",
+      "away": "Egypt",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-07-03T18:00:00Z",
+      "minute": null
+    },
+    {
+      "id": 537427,
+      "group": "J",
+      "home": "Argentina",
+      "away": "Cape Verde",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-07-03T22:00:00Z",
       "minute": null
     }
   ]
