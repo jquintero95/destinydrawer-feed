@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-27T23:31:20.348Z",
+  "lastUpdated": "2026-06-28T01:11:49.079Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1502,8 +1502,8 @@
       "group": "K",
       "home": "DR Congo",
       "away": "Uzbekistan",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 1,
       "status": "LIVE",
       "kickoffUTC": "2026-06-27T23:30:00Z",
       "minute": null
