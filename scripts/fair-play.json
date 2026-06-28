@@ -1,7 +1,7 @@
 {
   "_note": "Cumulative FIFA fair-play deductions per team. Update after each matchday. Points: YC = -1 | 2nd YC (indirect red) = -3 | Direct RC = -3 | YC + Direct RC = -4. More negative = worse fair play. Teams not listed default to 0.",
-  "_source": "Sofascore match incidents (auto-updated via Chrome). Last run: 2026-06-27.",
-  "_processedMatchIds": [15186499, 15186840, 15186800, 15186827, 15186502, 15186769, 15186770, 15186740, 15186858, 15186672, 15186520, 15186713, 15186829, 15186821, 15186732, 15186744, 15186864, 15186861, 15186907, 15186908, 15186972, 15186973, 15186891, 15186887, 15186537, 15186771, 15186841, 15186803, 15186828, 15186822, 15186624, 15186676],
+  "_source": "Sofascore match incidents (auto-updated via Chrome). Last run: 2026-06-28.",
+  "_processedMatchIds": [15186499, 15186840, 15186800, 15186827, 15186502, 15186769, 15186770, 15186740, 15186858, 15186672, 15186520, 15186713, 15186829, 15186821, 15186732, 15186744, 15186864, 15186861, 15186907, 15186908, 15186972, 15186973, 15186891, 15186887, 15186537, 15186771, 15186841, 15186803, 15186828, 15186822, 15186624, 15186676, 15186696, 15186717],
   "teams": {
     "Algeria":              -1,
     "Argentina":            -2,
@@ -12,11 +12,11 @@
     "Brazil":               -5,
     "Canada":               -5,
     "Cape Verde":           -4,
-    "Colombia":             -3,
+    "Colombia":             -4,
     "Croatia":              -2,
     "Curacao":              -7,
     "Czech Republic":       -1,
-    "DR Congo":             -2,
+    "DR Congo":             -5,
     "Ecuador":              -5,
     "Egypt":                -6,
     "England":              -2,
@@ -50,6 +50,6 @@
     "Türkiye":              -2,
     "United States":        -5,
     "Uruguay":              -8,
-    "Uzbekistan":           -2
+    "Uzbekistan":           -4
   }
 }
