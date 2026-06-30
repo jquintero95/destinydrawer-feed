@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-06-30T01:26:39.610Z",
+  "lastUpdated": "2026-06-30T05:40:31.861Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1568,9 +1568,9 @@
       "group": "F",
       "home": "Netherlands",
       "away": "Morocco",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 3,
+      "awayScore": 4,
+      "status": "FT",
       "kickoffUTC": "2026-06-30T01:00:00Z",
       "minute": null
     },
