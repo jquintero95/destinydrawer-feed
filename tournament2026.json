@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-07-02T23:44:46.928Z",
+  "lastUpdated": "2026-07-03T01:19:11.596Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1656,9 +1656,9 @@
       "group": "K",
       "home": "Portugal",
       "away": "Croatia",
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "LIVE",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "FT",
       "kickoffUTC": "2026-07-02T23:00:00Z",
       "minute": null
     },
