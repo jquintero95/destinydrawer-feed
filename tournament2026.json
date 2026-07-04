@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-07-04T04:53:34.152Z",
+  "lastUpdated": "2026-07-04T07:33:53.519Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1770,6 +1770,28 @@
       "awayScore": null,
       "status": "NS",
       "kickoffUTC": "2026-07-07T00:00:00Z",
+      "minute": null
+    },
+    {
+      "id": 537381,
+      "group": null,
+      "home": "Argentina",
+      "away": "Egypt",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-07-07T16:00:00Z",
+      "minute": null
+    },
+    {
+      "id": 537382,
+      "group": null,
+      "home": "Switzerland",
+      "away": "Colombia",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "NS",
+      "kickoffUTC": "2026-07-07T20:00:00Z",
       "minute": null
     }
   ]
