@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-07-04T18:30:51.308Z",
+  "lastUpdated": "2026-07-04T19:46:16.003Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1712,8 +1712,8 @@
       "home": "Canada",
       "away": "Morocco",
       "homeScore": 0,
-      "awayScore": 1,
-      "status": "LIVE",
+      "awayScore": 3,
+      "status": "FT",
       "kickoffUTC": "2026-07-04T17:00:00Z",
       "minute": null
     },
