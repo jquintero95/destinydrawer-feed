@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-07-18T21:22:45.177Z",
+  "lastUpdated": "2026-07-18T22:01:52.553Z",
   "tournamentStatus": "group_stage",
   "freeUntil": "2026-06-17T23:59:59Z",
   "groups": [
@@ -1866,8 +1866,8 @@
       "home": "France",
       "away": "England",
       "homeScore": 0,
-      "awayScore": 2,
-      "status": "LIVE",
+      "awayScore": 4,
+      "status": "HT",
       "kickoffUTC": "2026-07-18T21:00:00Z",
       "minute": null
     },
